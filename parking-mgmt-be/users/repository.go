@@ -8,13 +8,18 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// Repository allow us to interact with the mongo database
 type Repository struct{}
 
 //TODO change for the docker container name
-const SERVER = "192.168.99.100:27017"
 
+// SERVER points to the mongo database server with port number
+const SERVER = "parking-mgmt-db:27017"
+
+// DBNAME points to the database name
 const DBNAME = "parking-mgmt"
 
+// DOCNAME points to the collection name
 const DOCNAME = "users"
 
 // GetUsers returns the list of Users
