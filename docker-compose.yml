@@ -26,7 +26,7 @@ services:
       context: ./parking-mgmt-fe-react
       dockerfile: Dockerfile
     ports:
-      - 8080:80
+      - 8080:5000
     networks:
       - frontend
     depends_on:

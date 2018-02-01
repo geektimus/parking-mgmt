@@ -1,13 +1,12 @@
 # build stage
-FROM golang:1.9.3 AS build-env
-
-ADD . /go/src/github.com/geektimus/parking-mgmt/parking-mgmt-be
+FROM golang:1.9.3
 WORKDIR /go/src/github.com/geektimus/parking-mgmt/parking-mgmt-be
-RUN go get ./... && GOOS=linux go build -o app .
+COPY . .
+RUN go get -d ./... && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o parking-be .
 
 # final stage
-FROM alpine
+FROM alpine:3.7
 RUN apk --no-cache add ca-certificates
-WORKDIR /app
-COPY --from=build-env /go/src/github.com/geektimus/parking-mgmt/parking-mgmt-be/app /app/
-ENTRYPOINT ./app
+WORKDIR /root/
+COPY --from=0 /go/src/github.com/geektimus/parking-mgmt/parking-mgmt-be/parking-be .
+ENTRYPOINT ./parking-be
