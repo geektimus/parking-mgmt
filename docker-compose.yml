@@ -20,32 +20,7 @@ services:
     depends_on:
       - parking-mgmt-db
 
-  parking-mgmt-react:
-    image: codingmaniacs/parking-mgmt-fe-react
-    build:
-      context: ./parking-mgmt-fe-react
-      dockerfile: Dockerfile
-    ports:
-      - 8080:5000
-    networks:
-      - frontend
-    depends_on:
-      - parking-mgmt-be
-  
-  parking-mgmt-vue:
-    image: codingmaniacs/parking-mgmt-fe-vue
-    build:
-      context: ./parking-mgmt-fe-vue
-      dockerfile: Dockerfile
-    ports:
-      - 8181:80
-    networks:
-      - frontend
-    depends_on:
-      - parking-mgmt-be
-
 networks:
-  frontend:
   backend:
 
 volumes:
